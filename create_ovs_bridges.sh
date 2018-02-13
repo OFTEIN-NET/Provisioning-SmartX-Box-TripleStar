@@ -17,8 +17,8 @@
 # Description	: Script for installing and Configuring OpenvSwitch based SDN
 #
 # Created by    : Muhammad Usman
-# Version       : 0.2
-# Last Update	: December, 2017
+# Version       : 0.3
+# Last Update	: February, 2018
 #
 
 #Before execution set these parameters carefully 
@@ -33,7 +33,7 @@ SDX_CONTROLLER=
 
 Box_DP_IP=
 GIST_DP_IP=
-MYREN_DP_IP=
+UM_DP_IP=
 NCKU_DP_IP=
 
 OVSVM_IP=192.168.122.101
@@ -107,19 +107,19 @@ sudo ovs-vsctl set Interface ovs_vxlan_GIST1 type=vxlan
 sudo ovs-vsctl set Interface ovs_vxlan_GIST1 options:remote_ip=$GIST_DP_IP
 
 
-elif [ $HUB_SITE = "MYREN" ]; then
-sudo ovs-vsctl add-port brdev MY_MYREN
-sudo ovs-vsctl set Interface MY_MYREN type=patch
-sudo ovs-vsctl set Interface MY_MYREN options:peer=C_MY_MYREN
+elif [ $HUB_SITE = "UM" ]; then
+sudo ovs-vsctl add-port brdev MY_UM
+sudo ovs-vsctl set Interface MY_UM type=patch
+sudo ovs-vsctl set Interface MY_UM options:peer=C_MY_UM
 
-sudo ovs-vsctl add-port brcap C_MY_MYREN
-sudo ovs-vsctl set Interface C_MY_MYREN type=patch
-sudo ovs-vsctl set Interface C_MY_MYREN options:peer=MY_MYREN
+sudo ovs-vsctl add-port brcap C_MY_UM
+sudo ovs-vsctl set Interface C_MY_UM type=patch
+sudo ovs-vsctl set Interface C_MY_UM options:peer=MY_UM
 
 # Set Overlay Tunnel Ports
-sudo ovs-vsctl add-port brcap ovs_vxlan_MYREN
-sudo ovs-vsctl set Interface ovs_vxlan_MYREN type=vxlan
-sudo ovs-vsctl set Interface ovs_vxlan_MYREN options:remote_ip=$MYREN_DP_IP
+sudo ovs-vsctl add-port brcap ovs_vxlan_UM
+sudo ovs-vsctl set Interface ovs_vxlan_UM type=vxlan
+sudo ovs-vsctl set Interface ovs_vxlan_UM options:remote_ip=$UM_DP_IP
 
 elif [ $HUB_SITE = "NCKU" ]; then
 sudo ovs-vsctl add-port brdev TW_NCKU
