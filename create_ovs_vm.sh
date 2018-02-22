@@ -47,7 +47,7 @@ fi
 
 # Install required software
 echo "*      Installing required software                                *"
-sudo apt-get install -y virsh virt-manager qemu-system virtinst
+sudo apt-get install -y virt-manager qemu-system virtinst
 ssh-copy-id netcs@$controller_ip <<< $controller_pwd
 
 echo "*      Required software installation completed.                   *"
