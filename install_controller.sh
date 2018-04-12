@@ -200,8 +200,6 @@ sudo chown www-data /var/lib/openstack-dashboard/secret_key
 service apache2 reload
 }
 
-}
-
 update_package
 install_env_software
 install_keystone
