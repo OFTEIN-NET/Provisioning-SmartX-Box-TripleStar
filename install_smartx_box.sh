@@ -226,9 +226,9 @@ sed -i "s/#connection = <None>/connection = mysql+pymysql:\/\/heat:$PASSWORD@$M_
 
 sed -i "s/#transport_url = <None>/transport_url = rabbit:\/\/openstack:$PASSWORD@$M_IP/g" /etc/heat/heat.conf
 
-sed -i "s/#auth_uri = <None>/auth_uri = http:\/\/$management_node_ip:5000\n\
-auth_url = http:\/\/$management_node_ip:35357\n\
-memcached_servers = $management_node_ip:11211\n\
+sed -i "s/#auth_uri = <None>/auth_uri = http:\/\/$controller_ip:5000\n\
+auth_url = http:\/\/$controller_ip:35357\n\
+memcached_servers = $M_IP:11211\n\
 auth_type = password\n\
 project_domain_name = default\n\
 user_domain_name = default\n\
@@ -239,16 +239,16 @@ password = $PASSWORD/g" /etc/heat/heat.conf
 
 sed -i "s/#auth_type = <None>/\[trustee\]\n\
 auth_type = password\n\
-auth_url = http:\/\/$management_node_ip:35357\n\
+auth_url = http:\/\/$controller_ip:35357\n\
 username = heat\n\
 password = $PASSWORD\n\
 user_domain_name = default\n\
 \n\
 [clients_keystone]\n\
-auth_uri = http:\/\/$management_node_ip:35357\n\
+auth_uri = http:\/\/$controller_ip:35357\n\
 \n\
 [ec2authtoken]\n\
-auth_uri = http:\/\/$management_node_ip:5000/g" /etc/heat/heat.conf
+auth_uri = http:\/\/$controller_ip:5000/g" /etc/heat/heat.conf
 
 sed -i "s/#debug = false/heat_metadata_server_url = http:\/\/$M_IP:8000\n\
 heat_waitcondition_server_url = http:\/\/$M_IP:8000\/v1\/waitcondition\n\
